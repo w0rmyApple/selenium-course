@@ -17,6 +17,7 @@ namespace TheSecondAssignment
         public void OpenBrowser()
         {
             FirefoxOptions options = new FirefoxOptions();
+            //TODO не работает и одному богу известно что не так
             options.UseLegacyImplementation = true;
             options.BrowserExecutableLocation = @"C:\Program Files\Mozilla Firefox\firefox.exe";
             driver = new FirefoxDriver(options);
