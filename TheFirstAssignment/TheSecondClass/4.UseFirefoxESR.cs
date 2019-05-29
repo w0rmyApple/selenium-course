@@ -1,13 +1,14 @@
-﻿using System;
+﻿
+using System;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
 
-namespace TheSecondAssignment
+namespace HomeTasks
 {
     [TestFixture(Description = "1. Авторизация в системе через Firefox "), Order(1)]
-    public class UseFirefox
+    public class UseFirefoxESR
     {
         private IWebDriver driver;
         private WebDriverWait wait;
@@ -15,7 +16,11 @@ namespace TheSecondAssignment
         [Test(Description = "1. Открыть браузер"), Order(1)]
         public void OpenBrowser()
         {
-            driver = new FirefoxDriver();
+            FirefoxOptions options = new FirefoxOptions();
+            //TODO не работает и одному богу известно что не так
+            options.UseLegacyImplementation = true;
+            options.BrowserExecutableLocation = @"C:\Program Files\Mozilla Firefox\firefox.exe";
+            driver = new FirefoxDriver(options);
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             driver.Navigate().GoToUrl("http://localhost/litecart/admin/");
             driver.Manage().Window.Maximize();

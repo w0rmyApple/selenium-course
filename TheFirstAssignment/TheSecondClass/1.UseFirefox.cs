@@ -1,15 +1,13 @@
 ﻿using System;
-using System.Runtime.Remoting.Contexts;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NUnit.Framework;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
 
-namespace TheFirstAssignment
+namespace HomeTasks
 {
-    [TestFixture(Description = "2. Авторизация в системе "), Order(2)]
-    class LoginLikeAnAdmin
+    [TestFixture(Description = "1. Авторизация в системе через Firefox "), Order(1)]
+    public class UseFirefox
     {
         private IWebDriver driver;
         private WebDriverWait wait;
@@ -17,7 +15,7 @@ namespace TheFirstAssignment
         [Test(Description = "1. Открыть браузер"), Order(1)]
         public void OpenBrowser()
         {
-            driver = new ChromeDriver();
+            driver = new FirefoxDriver();
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             driver.Navigate().GoToUrl("http://localhost/litecart/admin/");
             driver.Manage().Window.Maximize();

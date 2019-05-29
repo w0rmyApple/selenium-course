@@ -61,9 +61,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="1.FindNews.cs" />
+    <Compile Include="TheFirstClass\1.FindNews.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="2.LoginLikeAnAdmin.cs" />
+    <Compile Include="TheSecondClass\1.UseFirefox.cs" />
+    <Compile Include="TheFirstClass\2.LoginLikeAnAdmin.cs" />
+    <Compile Include="TheSecondClass\2.UseExplorer.cs" />
+    <Compile Include="TheSecondClass\3.UseFireFoxNightly.cs" />
+    <Compile Include="TheSecondClass\4.UseFirefoxESR.cs" />
+    <Compile Include="TheSecondClass\5.UseChrome.cs" />
+    <Compile Include="TheThirdClass\1.ClickAndCheck.cs" />
+    <Compile Include="TheThirdClass\MenuTitle.cs" />
+    <Compile Include="TheThirdClass\TestBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -1,14 +1,14 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 
-namespace TheFirstAssignment
+namespace HomeTasks
 {
-    [TestFixture(Description = "1. Поиск по запросу \"News\" "), Order(1)]
-    public class FindNews
+    [TestFixture(Description = "5. Авторизация в системе "), Order(2)]
+    class UseChrome
     {
         private IWebDriver driver;
         private WebDriverWait wait;
@@ -18,16 +18,17 @@ namespace TheFirstAssignment
         {
             driver = new ChromeDriver();
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-            driver.Navigate().GoToUrl("https://www.google.com/");
+            driver.Navigate().GoToUrl("http://localhost/litecart/admin/");
             driver.Manage().Window.Maximize();
-
         }
-        [Test(Description = "2. Поиск по ключу"), Order(2)]
-        public void FindNewsInBrowser()
+        [Test(Description = "2. Авторизоваться в системе"), Order(2)]
+        public void AutorizationAsAnAdmin()
         {
-            driver.FindElement(By.Name("q")).SendKeys("News");
-            driver.FindElement(By.Name("btnK")).Click();
-            wait.Until(ExpectedConditions.TitleIs("News - Поиск в Google"));
+            string login = "admin";
+            driver.FindElement(By.Name("username")).SendKeys(login);
+            driver.FindElement(By.Name("password")).SendKeys(login);
+            driver.FindElement(By.Name("login")).Click();
+            wait.Until(ExpectedConditions.TitleIs("My Store"));
 
         }
         [Test(Description = "3. Закрытие браузера"), Order(3)]
@@ -36,6 +37,5 @@ namespace TheFirstAssignment
             driver.Quit();
             driver = null;
         }
-
     }
 }
