@@ -70,7 +70,6 @@
     <Compile Include="TheSecondClass\4.UseFirefoxESR.cs" />
     <Compile Include="TheSecondClass\5.UseChrome.cs" />
     <Compile Include="TheThirdClass\1.ClickAndCheck.cs" />
-    <Compile Include="TheThirdClass\MenuTitle.cs" />
     <Compile Include="TheThirdClass\TestBase.cs" />
   </ItemGroup>
   <ItemGroup>
