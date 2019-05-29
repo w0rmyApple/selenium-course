@@ -45,31 +45,55 @@ namespace TheFirstAssignment.TheThirdClass
             driver.FindElement(By.Name("login")).Click();
             wait.Until(ExpectedConditions.TitleIs("My Store"));
 
+            
             locator = By.XPath("//li[contains(@id,'app-')]");
-            IList<IWebElement> listOfBarTitles = driver.FindElements(locator);
             locator1 = By.XPath("//li[contains(@id,'doc-')]");
-            int countOfBarTitles = listOfBarTitles.Count;
-            if (countOfBarTitles > 0)
+
+            List<string> items = driver.FindElements(locator).Select(l => l.Text).ToList();
+            foreach(var item in items)
             {
-                for (int i = 0; i < countOfBarTitles; i++)
+                var currentItemLocator = By.XPath($"//li[contains(@id,'app-')]//span[contains(text(), '{item}')]");
+                IWebElement element = wait.Until(ExpectedConditions.ElementExists(currentItemLocator));
+                element.Click();
+                Assert.True(IsElementPresent(driver, By.XPath("//h1")), "Ожидалось, что заголовок будет видимым ");
+
+                var nestedItems = driver.FindElements(locator1).Select(l => l.Text).ToList();
+                foreach(var nestedItem in nestedItems)
                 {
-                    listOfBarTitles = driver.FindElements(locator);
-                    driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
-                    listOfBarTitles[i].Click();
-                    IList<IWebElement> listOfNestedTitles = driver.FindElements(locator1);
-                    int countOfNestedTitles = listOfNestedTitles.Count;
-                    if (countOfNestedTitles > 0)
-                    {
-                        for (int j = 0; j < countOfNestedTitles; j++)
-                        {
-                            listOfNestedTitles = driver.FindElements(locator1);
-                            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
-                            listOfNestedTitles[j].Click();
-                            Assert.True(IsElementPresent(driver,By.XPath("//h1")), "Ожидалось, что заголовок будет видимым ");
-                        }
-                    }
+                    if (nestedItem.Equals(nestedItems.First()))
+                        continue;
+
+                    var currentNestedItemLocator = By.XPath($"//li[contains(@id,'doc-')]//span[contains(text(), '{nestedItem}')]");
+                    IWebElement nestedElement = wait.Until(ExpectedConditions.ElementExists(currentNestedItemLocator));
+                    nestedElement.Click();
+                    Assert.True(IsElementPresent(driver, By.XPath("//h1")), "Ожидалось, что заголовок будет видимым ");
                 }
             }
+            
+            //IList<IWebElement> listOfBarTitles = driver.FindElements(locator);
+            //locator1 = By.XPath("//li[contains(@id,'doc-')]");
+            //int countOfBarTitles = listOfBarTitles.Count;
+            //if (countOfBarTitles > 0)
+            //{
+            //    for (int i = 0; i < countOfBarTitles; i++)
+            //    {
+            //        listOfBarTitles = driver.FindElements(locator);
+            //        driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+            //        listOfBarTitles[i].Click();
+            //        IList<IWebElement> listOfNestedTitles = driver.FindElements(locator1);
+            //        int countOfNestedTitles = listOfNestedTitles.Count;
+            //        if (countOfNestedTitles > 0)
+            //        {
+            //            for (int j = 0; j < countOfNestedTitles; j++)
+            //            {
+            //                listOfNestedTitles = driver.FindElements(locator1);
+            //                driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+            //                listOfNestedTitles[j].Click();
+            //                Assert.True(IsElementPresent(driver,By.XPath("//h1")), "Ожидалось, что заголовок будет видимым ");
+            //            }
+            //        }
+            //    }
+            //}
 
         }
 
