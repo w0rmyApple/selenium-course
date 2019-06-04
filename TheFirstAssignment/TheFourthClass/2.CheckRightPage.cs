@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading;
 
 namespace TheFirstAssignment.TheThirdClass
@@ -25,8 +26,8 @@ namespace TheFirstAssignment.TheThirdClass
         public void OpenBrowser()
         {
             // driver = new FirefoxDriver();
-            //driver = new ChromeDriver();
-            driver = new InternetExplorerDriver();
+            driver = new ChromeDriver();
+            //driver = new InternetExplorerDriver();
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             driver.Navigate().GoToUrl("http://localhost/litecart/");
             driver.Manage().Window.Maximize();
@@ -56,8 +57,11 @@ namespace TheFirstAssignment.TheThirdClass
             Assert.True(driver.FindElement(locator2).Text == newPrice &&
                        (driver.FindElement(locator3).Text == oldPrice));
 
+            Regex mask = new Regex(@"\d+");
+            // R - [0], G - [1], B - [2], A - [3]. 
+            var matches = mask.Matches(driver.FindElement(locator3).GetCssValue("color"));
             //c
-            char[] delimiterChars = { '(', ')', ',', ' ' };
+            char[] delimiterChars = { '(', ')', ',', ' '};
             string[] nums = driver.FindElement(locator3).GetCssValue("color").Split(delimiterChars);
             Assert.AreEqual(nums[1], nums[3] ,nums[5],"Ожидалось, что старая цена будет серой");
             Assert.True(driver.FindElement(locator3).GetCssValue("text-decoration").Contains("line-through"),"Ожидалось, что старая цена будет зачеркнута");

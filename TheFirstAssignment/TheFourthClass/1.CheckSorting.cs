@@ -33,7 +33,7 @@ namespace TheFirstAssignment.TheThirdClass
         bool CheckSort(By locator)
         {
             List<string> names = driver.FindElements(locator).Select(l => l.Text).ToList();
-            List<string> sorted = names;
+            List<string> sorted = new List<string>(names);
             sorted.Sort();
             bool flag = true;
             for (int i = 0; i < names.Count; i++)
@@ -62,7 +62,7 @@ namespace TheFirstAssignment.TheThirdClass
             Assert.True(IsElementPresent(driver, By.XPath("//h1[contains(text(),'Countries')]")), "Ожидался переход на страницу '/Countries/'");
 
             //a
-
+          
             locator = By.XPath("//form[contains(@name,'countries_form')]//tr[contains(@class,'row')]//td[5]");
             //сортируем взятый список стран
 
@@ -82,7 +82,7 @@ namespace TheFirstAssignment.TheThirdClass
                     IWebElement link= driver.FindElement(By.CssSelector($"[href='{href}']"));
                     link.Click();
 
-                    locator = By.XPath("//form[contains(@method,'post')]//td[3]//input[contains(@type,'hidden')]");
+                    locator = By.XPath("//form[contains(@method,'post')]//td[3]//input[contains(@type,'hidden')]/..");
                     Assert.True(CheckSort(locator), "Ожидалось, что список зон будет отсортирован");
 
                     driver.Navigate().Back();
@@ -123,7 +123,7 @@ namespace TheFirstAssignment.TheThirdClass
                 string href = element.GetAttribute("href");
                 IWebElement link = driver.FindElement(By.CssSelector($"[href='{href}']"));
                 link.Click();
-                locator = By.XPath("//select[contains(@name,'[zone_code]')]");
+                locator = By.XPath("//select[contains(@name,'[zone_code]')]//option[contains(@selected,'selected')]");
                 Assert.True(CheckSort(locator), "Ожидалось, что список зон будет отсортирован");
                 driver.Navigate().Back();
             }
