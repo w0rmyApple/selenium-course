@@ -33,6 +33,13 @@ namespace TheFirstAssignment.TheThirdClass
             driver.Manage().Window.Maximize();
 
             //a
+            Random rnd = new Random();
+            Char[] pwdChars = new Char[26] { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
+            string email = String.Empty;
+            for (int i = 0; i < 15; i++)
+                email += pwdChars[rnd.Next(0, 25)];
+            email = email + '@' + "testemail.com";
+
             locator = By.XPath("//div[contains(@id,'box-account-login')]//a");
             driver.FindElement(locator).Click();
             wait.Until(ExpectedConditions.TitleIs("Create Account | My Store"));
@@ -42,7 +49,7 @@ namespace TheFirstAssignment.TheThirdClass
             string adress = "Black street";
             string city = "Los Angeles";
             string country = "United States";
-            string email = "marymarymap@mail.ru";
+            //string email = "marymarymap@mail.ru";
             string phone = "89002100999";
             string password = "Secret123$";
             string zone = "NY";
