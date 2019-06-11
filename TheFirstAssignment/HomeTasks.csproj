@@ -73,6 +73,7 @@
     <Compile Include="TheSecondClass\3.UseFireFoxNightly.cs" />
     <Compile Include="TheSecondClass\4.UseFirefoxESR.cs" />
     <Compile Include="TheSecondClass\5.UseChrome.cs" />
+    <Compile Include="TheSeventhClass\1.CheckLinks.cs" />
     <Compile Include="TheSixthClass\1.WorkWithCart.cs" />
     <Compile Include="TheThirdClass\1.ClickAndCheck.cs" />
     <Compile Include="TheThirdClass\2.CheckStickers.cs" />
