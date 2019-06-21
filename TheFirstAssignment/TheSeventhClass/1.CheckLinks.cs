@@ -68,6 +68,7 @@ namespace TheFirstAssignment.TheThirdClass
                 driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
                 driver.Close();
                 driver.SwitchTo().Window(mainWindow);
+                
             }
             driver.Quit();
             driver = null;
